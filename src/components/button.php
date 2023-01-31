@@ -1,0 +1,1 @@
+<div onclick="<?= $onClick ?>" class="bg-primary-30 shadow-lg shadow-primary-20 text-white text-center min-w-[100px] py-2 rounded-lg hover:cursor-pointer <?= $class ?>"><?= $label ?></div>
