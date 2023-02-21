@@ -1,4 +1,4 @@
 <div class="<?= $class ?>">
- <div class="text-lg text-black"><?= $label ?></div>
- <input id="<?= $id ?>" class="border border-black w-full h-[40px] rounded-lg p-2" />
+ <div class="text-base text-black"><?= $label ?></div>
+ <input type="<?= $type ?>" value="<?= $value ?>" id="<?= $id ?>" name="<?= $id ?>"  class="border border-black w-full h-[40px] rounded-lg p-2"/>
 </div>
