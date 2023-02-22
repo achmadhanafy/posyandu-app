@@ -55,4 +55,20 @@ class Controller
             $iv
         );
     }
+
+    function setCookie($name, $value)
+    {
+        $cookie_name = $name;
+        $cookie_value = $value;
+        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+    }
+
+    function getCookie($name)
+    {
+        if (!isset($_COOKIE[$$name])) {
+            return false;
+        } else {
+            return $_COOKIE[$cookie_name];
+        }
+    }
 }

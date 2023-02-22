@@ -7,8 +7,9 @@
     <div class="text-secondary-40 font-semibold font-header text-xl">
       Posyandu Cipedak
     </div>
-    <div class="text-secondary-40 mt-3">
-      Hai, Achmad Hanafy
+    <div id='userName' class="text-secondary-40 mt-3 font-semibold">
+    </div>
+    <div id='userRole' class="text-secondary-40 mt-3 font-semibold">
     </div>
   </div>
   <div class="mt-8 ">
@@ -45,8 +46,30 @@
   </div>
   <div class="text-secondary-40 font-bold cursor-pointer bottom-0 mt-5 text-center text-lg px-5 py-2 rounded-lg flex items-center">
     <img style="width: 25px; height: 25px" src="<?= ASSET; ?>logout.svg" />
-    <div class="ml-5">
-      Logout
-    </div>
+    <form method="post">
+      <button name="logout" class="ml-5">
+        Logout
+      </button>
+    </form>
+
   </div>
 </div>
+<script>
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+  document.getElementById('userName').innerHTML = `Hai, ${getCookie('name')}`
+  document.getElementById('userRole').innerHTML = `Jabatan: ${getCookie('role')}`
+</script>

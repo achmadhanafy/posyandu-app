@@ -13,8 +13,62 @@ class Landing extends Controller
 
  public function login($status = '')
  {
+  $resultLogin = null;
+  // default form 
+  $data['email'] = '';
+  $data['password'] = '';
+
+ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  // Get Auth By Email
+  $queryGetAuthByEmail = "SELECT * FROM `tb_auth` WHERE email ='$email'";
+  $resultGetAuthByEmail = mysqli_query($this->conn(),$queryGetAuthByEmail);
+  $responGetAuthByEmail = mysqli_fetch_assoc($resultGetAuthByEmail);
+  
+  // Check email exist
+  if($responGetAuthByEmail === null){
+   $resultLogin = 'Email atau Password salah';
+  }
+
+  // Check Password matches
+  if(isset($responGetAuthByEmail)){
+   $decryptPass = $this->decrypt($responGetAuthByEmail['password']);
+   if($decryptPass != $password){
+    $resultLogin = 'Email atau Password salah';
+   }
+  }
+
+  // execute if validation pass
+  if ($resultLogin === null){
+   $id = uniqid();
+   $authId = $responGetAuthByEmail['id'];
+   
+   // replace authId with newest
+   $queryGetLogin = "SELECT * FROM `tb_user_login` WHERE authId = '$authId'";
+   $resultGetLogin = mysqli_query($this->conn(),$queryGetLogin);
+   $responGetLogin = mysqli_fetch_assoc($resultGetLogin);
+
+   // delete current login
+   if(isset($responGetLogin)){
+    $queryDeleteLogin = "DELETE FROM `tb_user_login` WHERE authId = '$authId'";
+    $resultDeleteLogin = mysqli_query($this->conn(),$queryDeleteLogin);
+   }
+
+   // Create token login
+   $querySetLogin = "INSERT INTO `tb_user_login`(`id`, `authId`) VALUES ('$id','$authId')";
+   $resultSetLogin = mysqli_query($this->conn(),$querySetLogin);
+   if (isset($resultSetLogin)){
+    $this->setCookie('token',$id);
+    header('Location:' . $this->baseurl() . 'public/pendaftaran');
+   }
+  }
+ }
+
   $data['title'] = 'Halaman Masuk';
   $data['path'] = 'landing';
+  $data['setLoginRes'] = $resultLogin;
   $data['status'] = $status;
   $this->view('templates/header', $data);
   $this->view('pages/landing/login/index', $data);
@@ -52,7 +106,7 @@ class Landing extends Controller
    $data['confirmPassword'] = $confirmPassword;
    $data['otorisasi'] = $otorisasi;
 
-  
+
 
    // Validasi otorisasi
    $queryGetOtorisasi = "SELECT * FROM `tb_otorisasi` WHERE id = '$otorisasi'";
