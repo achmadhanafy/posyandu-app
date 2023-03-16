@@ -38,41 +38,46 @@ class App
   // prevent akses menu without token
   $getUrl = $this->parseURL();
   $token = $this->getCookie('token');
-  if ($token == null && $getUrl[0] !== 'landing') {
-   echo '<script>window.location = "'.BASEURL.'public/landing"</script>';
+  if (isset($getUrl[0])) {
+   if ($token == null && $getUrl[0] !== 'landing') {
+    echo '<script>window.location = "' . BASEURL . 'public/landing"</script>';
+   }
   }
 
+
   // Validasi token
-  if( $token != null){
+  if ($token != null) {
    $queryGetToken = "SELECT * FROM `tb_user_login` WHERE id = '$token'";
-   $resultGetToken = mysqli_query($this->connection(),$queryGetToken);
+   $resultGetToken = mysqli_query($this->connection(), $queryGetToken);
    $responGetToken = mysqli_fetch_assoc($resultGetToken);
-   if($responGetToken == null){
+   if ($responGetToken == null) {
     $this->setCookie('token', '');
-    echo '<script>window.location = "'.BASEURL.'public/landing"</script>';
+    echo '<script>window.location = "' . BASEURL . 'public/landing"</script>';
    } else {
     // Get Data user
     $authId = $responGetToken['authId'];
     $queryGetUser = "SELECT * FROM `tb_auth` WHERE id = '$authId'";
-    $resultGetUser = mysqli_query($this->connection(),$queryGetUser);
+    $resultGetUser = mysqli_query($this->connection(), $queryGetUser);
     $responGetUser = mysqli_fetch_assoc($resultGetUser);
 
-    $roleId = $responGetUser['kode_otorisasi']; 
+    $roleId = $responGetUser['kode_otorisasi'];
     $queryGetRole = "SELECT * FROM `tb_otorisasi` WHERE id = '$roleId'";
-    $resultGetRole = mysqli_query($this->connection(),$queryGetRole);
+    $resultGetRole = mysqli_query($this->connection(), $queryGetRole);
     $responGetRole = mysqli_fetch_assoc($resultGetRole);
     // Set user data to cookie
-    $this->setCookie('name',$responGetUser['nama']);
-    $this->setCookie('role',$responGetRole['nama_jabatan']);
+    $this->setCookie('name', $responGetUser['nama']);
+    $this->setCookie('role', $responGetRole['nama_jabatan']);
     //redirect if access landing when have token
-    if( $getUrl[0] === 'landing')
-    {
-     echo '<script>window.location = "'.BASEURL.'public/pendaftaran"</script>';
+    if (isset($getUrl[0])) {
+     if ($getUrl[0] === 'landing') {
+      echo '<script>window.location = "' . BASEURL . 'public/pendaftaran"</script>';
+     }
+    } else {
+     echo '<script>window.location = "' . BASEURL . 'public/landing"</script>';
     }
    }
-   
   }
-  
+
 
   //Runnig controller & method, serta kirimkan params jika ada
   call_user_func_array([$this->controller, $this->method], $this->params);
@@ -80,7 +85,7 @@ class App
   // func logout
   if (isset($_POST['logout'])) {
    $this->setCookie('token', '');
-   echo '<script>window.location = "'.BASEURL.'public/landing"</script>';
+   echo '<script>window.location = "' . BASEURL . 'public/landing"</script>';
   }
  }
 
