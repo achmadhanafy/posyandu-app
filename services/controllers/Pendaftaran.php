@@ -135,7 +135,6 @@ class Pendaftaran extends Controller
    // POST data to tb_ibuhamil
    $querySetIbuHamil = "INSERT INTO `tb_ibuhamil`(`nik`, `no_kk`, `nama`, `tgl_lahir`, `tgl_hpl`, `faskes`, `alamat_jalan`, `alamat_rt`, `alamat_rw`, `alamat_no`, `nama_suami`, `no_tlp`) VALUES ('$nik','$no_kk','$nama','$tgl_lahir','$tgl_hpl','$faskes','$alamat_jalan','$alamat_rt','$alamat_rw','$alamat_no','$nama_suami','$no_tlp')";
    $resultSetIbuHamil = mysqli_query($this->conn(), $querySetIbuHamil);
-   var_dump($querySetIbuHamil);
    // Set form to default if insert success
    if (isset($resultSetIbuHamil)) {
     $data['setIbuHamil'] = 'success';

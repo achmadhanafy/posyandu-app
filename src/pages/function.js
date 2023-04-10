@@ -24,5 +24,13 @@ function navigateLogin(props) {
   document.location.href = `${BASE_URL}public/landing/login${props?.registered ? '/registered' : '' }`;
 }
 
+function navigatePengkinianIbuHamil(){
+  document.location.href = `${BASE_URL}public/pengkinian/ibuhamil`;
+}
+
+function navigatePengkinianBalita(){
+  document.location.href = `${BASE_URL}public/pengkinian/balita`;
+}
+
 
 
