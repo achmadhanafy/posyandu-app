@@ -14,7 +14,7 @@
             Data Ibu Hamil Berhasil dimasukan
           </div>
         <?php endif; ?> -->
-        <div class="font-semibold text-xl mb-3 text-secondary-40 text-center">Pelayanan</div>
+        <div class="font-semibold text-xl mb-3 text-secondary-40 text-center">Peserta Pelayanan</div>
         <?php if ($data['action'] === 'patch-success') : ?>
           <div class="bg-secondary-10 px-3 py-2 my-5 rounded-lg font-semibold text-secondary-40" style="width:fit-content">
             Data berhasil diperbarui
@@ -47,14 +47,23 @@
           </form>
         <?php endif; ?>
 
-        <?php if ($data['action'] != 'ubah' && $data['action'] != 'hapus' && $data['getPelayanan'] !== false) : ?>
+        <?php if ($data['getPelayananIbuHamil'] !== false) : ?>
           <?php
-          $headerData = array('ID Pelayanan','Pelayanan', 'Alamat', 'Catatan', 'Jumlah Peserta', 'Tanggal Layanan');
-          $rowData = $data['getPelayanan'];
-          include '../src/components/pelayanan/tableJadwalPelayanan.php'
+          $id = $data['id'];
+          $headerData = array('ID Peserta','NIK', 'Nama', 'No Telephone', 'No Urut', 'Status', 'Action');
+          $rowData = $data['getPelayananIbuHamil'];
+          include '../src/components/pelayanan/tableDetailPeserta.php'
           ?>
         <?php endif; ?>
-        <?php if ($data['getPelayanan'] == false) : ?>
+        <?php if ($data['getPelayananBalita'] !== false) : ?>
+          <?php
+          $id = $data['id'];
+          $headerData = array('ID Peserta','NIK', 'Nama', 'No Urut', 'Status', 'Action');
+          $rowData = $data['getPelayananBalita'];
+          include '../src/components/pelayanan/tableDetailPeserta.php'
+          ?>
+        <?php endif; ?>
+        <?php if ($data['getPelayananIbuHamil'] == false && $data['getPelayananBalita'] == false) : ?>
           <div class="flex justify-center font-bold text-xl">
             Data tidak ditemukan
           </div>

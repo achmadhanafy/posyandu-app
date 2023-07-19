@@ -13,13 +13,13 @@
     </div>
   </div>
   <div class="mt-8 ">
-    <div class="flex text-white text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
+    <a href="<?= BASEURL ?>public/pelayanan" class="flex text-white text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
       <img style="width: 25px; height: 25px" src="<?= ASSET; ?>pelayanan.svg" />
       <div class="ml-5">
         Pelayanan
       </div>
-    </div>
-    <a class="flex text-white mt-5 text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
+    </a>
+    <a href="<?= BASEURL ?>public/pendaftaran" class="flex text-white mt-5 text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
       <img style="width: 25px; height: 25px" src="<?= ASSET; ?>pendaftaran.svg" />
       <div class="ml-5">
         Pendaftaran
@@ -31,12 +31,12 @@
         Pengkinian Data
       </div>
     </a>
-    <div class="flex text-white mt-5 text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
+    <a href="<?= BASEURL ?>public/imunisasi" class="flex text-white mt-5 text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
       <img style="width: 25px; height: 25px" src="<?= ASSET; ?>imunisasi.svg" />
       <div class="ml-5">
         Imunisasi
       </div>
-    </div>
+    </a>
     <div class="flex text-white mt-5 text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
       <img style="width: 25px; height: 25px" src="<?= ASSET; ?>laporan.svg" />
       <div class="ml-5">

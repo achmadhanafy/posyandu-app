@@ -22,6 +22,7 @@ class Pendaftaran extends Controller
   $data['usiaBulan'] = '';
   $data['bb'] = '';
   $data['tb'] = '';
+  $data['jenisKelamin'] = '';
 
   $data['setBalita'] = '';
 
@@ -39,6 +40,7 @@ class Pendaftaran extends Controller
    $usiaBulan = $_POST['usiaBulan'];
    $bb = $_POST['bb'];
    $tb = $_POST['tb'];
+   $jenisKelamin = $_POST['jenisKelamin'];
 
    //Return data to form
    $data['namaIbu'] = $namaIbu;
@@ -54,9 +56,10 @@ class Pendaftaran extends Controller
    $data['usiaBulan'] = $usiaBulan;
    $data['bb'] = $bb;
    $data['tb'] = $tb;
+   $data['jenisKelamin'] = $jenisKelamin;
 
    // Post form data to tb_balita
-   $querySetBalita = "INSERT INTO `tb_balita`(`nik`, `nama_anak`, `tgl_lahir`, `usiaTahun`, `usiaBulan`, `bb`, `tb`, `nama_ayah`, `nama_ibu`, `alamat_jalan`, `alamat_rt`, `alamat_rw`, `alamant_no`) VALUES ('$nik','$namaAnak','$tanggalLahir','$usiaTahun','$usiaBulan','$bb','$tb','$namaAyah','$namaIbu','$jalan','$rt','$rw','$no')";
+   $querySetBalita = "INSERT INTO `tb_balita`(`nik`, `nama_anak`, `tgl_lahir`, `usiaTahun`, `usiaBulan`, `bb`, `tb`, `nama_ayah`, `nama_ibu`, `alamat_jalan`, `alamat_rt`, `alamat_rw`, `alamant_no`, `jenis_kelamin`) VALUES ('$nik','$namaAnak','$tanggalLahir','$usiaTahun','$usiaBulan','$bb','$tb','$namaAyah','$namaIbu','$jalan','$rt','$rw','$no','$jenisKelamin')";
    $resultSetBalita = mysqli_query($this->conn(), $querySetBalita);
 
    if (isset($resultSetBalita)) {
@@ -75,6 +78,7 @@ class Pendaftaran extends Controller
     $data['usiaBulan'] = '';
     $data['bb'] = '';
     $data['tb'] = '';
+    $data['jenisKelamin'] = '';
    }
   }
 

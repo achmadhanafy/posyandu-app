@@ -4,159 +4,184 @@
   include '../src/components/sidebar.php'
   ?>
   <div class="flex ml-5 flex-col justify-center items-center w-full">
-    <div style="width: 700px;">
+    <div style="width: 100%;" class="mr-5">
       <div class="text-2xl mb-8 font-header font-semibold text-secondary-30">
-        Pelayanan Balita
+        Pengkinian Data
       </div>
       <div style="width: 100%;" class="border-2 border-secondary-40 rounded-lg p-5">
         <div class="flex justify-around bg-primary-10 rounded-lg" style="margin: -20px; padding: 20px; margin-bottom: 20px;">
           <?php
           $label = 'Pelayanan Balita';
-          $onClick ='navigatePelayananBalita()';
-          $class = 'font-semibold w-[200px]';
-          include '../src/components/button.php'
+          $href = BASEURL.'public/pelayanan/balita';
+          $class = 'font-semibold';
+          $style = 'width: 300px;';
+          include '../src/components/link.php'
           ?>
           <?php
           $label = 'Pelayanan Ibu Hamil';
-          $onClick = 'navigatePelayananIbuHamil()';
-          $class = 'font-semibold w-[200px]';
-          include '../src/components/button.php'
+          $href = BASEURL.'public/pelayanan/ibuhamil';
+          $class = 'font-semibold';
+          $style = 'width: 300px;';
+          include '../src/components/link.php'
           ?>
         </div>
-        <div class="flex">
-          <div class="w-1/2 mx-2">
-            <div class="text-center text-secondary-40 font-semibold">Data Orang Tua</div>
-            <?php
-            $label = 'No. Kartu Keluarga';
-            $id = 'kartuKeluarga';
-            $class = 'text-secondary-40 font-semibold mt-2';
-            include '../src/components/input.php'
-            ?>
-            <?php
-            $label = 'Nama Ibu';
-            $id = 'namaIbu';
-            $class = 'text-secondary-40 font-semibold mt-2';
-            include '../src/components/input.php'
-            ?>
-            <?php
-            $label = 'Nama Ayah';
-            $id = 'namaAyah';
-            $class = 'text-secondary-40 font-semibold mt-2';
-            include '../src/components/input.php'
-            ?>
-            
+        <!-- <?php if ($data['setIbuHamil'] === 'success') : ?>
+          <div class="bg-secondary-10 font-semibold mb-8 p-1 text-secondary-40 pl-5 mt-2 rounded-md">
+            Data Ibu Hamil Berhasil dimasukan
           </div>
-          <div class="w-1/2 mx-2">
-            <div class="text-center text-secondary-40 font-semibold">Alamat</div>
-            <?php
-            $label = 'Jalan/Gg';
-            $id = 'jalan';
-            $type = 'text';
-            $class = 'text-secondary-40 font-semibold mt-2';
-            include '../src/components/input.php'
-            ?>
-            <div class="flex flex-row items-end">
+        <?php endif; ?> -->
+        <div class="font-semibold text-xl mb-3 text-secondary-40 text-center">Pengkinian Balita</div>
+        <?php if ($data['action'] === 'patch-success') : ?>
+          <div class="bg-secondary-10 px-3 py-2 my-5 rounded-lg font-semibold text-secondary-40" style="width:fit-content">
+            Data berhasil diperbarui
+          </div>
+        <?php endif; ?>
+        <?php if ($data['action'] === 'delete-success') : ?>
+          <div style="background-color: rgb(220 38 38); width:fit-content" class="px-3 py-2 my-5 rounded-lg font-semibold text-white">
+            Data berhasil dihapus
+          </div>
+        <?php endif; ?>
+        <?php if ($data['action'] !== 'ubah') : ?>
+          <form method="post">
+            <div class="flex justify-end items-end mb-5">
               <?php
-              $label = 'RT';
-              $id = 'rt';
-              $type = 'text';
-              $class = 'text-secondary-40 font-semibold mt-2';
-              $style = 'width: 50px';
-              include '../src/components/input.php'
-              ?>
-              <div class="text-xl mx-5">/</div>
-              <?php
-              $label = 'RW';
-              $id = 'rw';
-              $type = 'text';
+              $label = 'Masukan nik/nama anak/nama ibu';
+              $id = 'cari_data';
+              $value = $data['cari_data'];
               $class = 'text-secondary-40 font-semibold mt-2';
               include '../src/components/input.php'
               ?>
               <?php
-              $label = 'No';
-              $id = 'no';
-              $type = 'text';
-              $class = 'text-secondary-40 font-semibold mt-2 ml-5';
-              include '../src/components/input.php'
+              $label = 'Cari';
+              $onClick = "";
+              $class = 'font-semibold mt-5 ml-5';
+              $style = 'width:100px; justify-self:center;height:40px';
+              $type = 'submit';
+              include '../src/components/button.php'
               ?>
             </div>
-          </div>
+          </form>
+        <?php endif; ?>
 
-        </div>
-        <div class="p-2 mt-5">
-          <div class="text-secondary-40 font-semibold mt-5 text-center">Data Balita</div>
+        <?php if ($data['action'] != 'ubah' && $data['action'] != 'hapus' && $data['getBalita'] !== false) : ?>
           <?php
-          $label = 'NIK';
-          $id = 'nik';
-          $type = 'text';
-          $class = 'text-secondary-40 font-semibold mt-2';
-          include '../src/components/input.php'
+          $headerData = array('NIK', 'Nama Anak', 'Usia', 'Berat Badan', 'Tinggi Badan', 'Nama Ayah', 'Nama Ibu', 'Alamat', 'Action');
+          $rowData = $data['getBalita'];
+          include '../src/components/tableBalita.php'
           ?>
-          <?php
-          $label = 'Nama Anak';
-          $id = 'namaAnak';
-          $class = 'text-secondary-40 font-semibold mt-2';
-          include '../src/components/input.php'
-          ?>
-          <?php
-          $label = 'Tanggal Lahir';
-          $id = 'tanggalLahir';
-          $type = 'date';
-          $class = 'text-secondary-40 font-semibold mt-2';
-          include '../src/components/input.php'
-          ?>
-          <div class="flex">
-            <div class="flex items-center mr-8">
-              <?php
-              $label = 'Usia (tahun)';
-              $id = 'usiaTahun';
-              $type = 'number';
-              $class = 'text-secondary-40 font-semibold mt-2';
-              include '../src/components/input.php'
-              ?>
-            </div>
-            <div class="flex items-center">
-              <?php
-              $label = 'Usia (bulan)';
-              $id = 'usiaBulan';
-              $type = 'number';
-              $class = 'text-secondary-40 font-semibold mt-2';
-              include '../src/components/input.php'
-              ?>
+        <?php endif; ?>
+        <?php if ($data['getBalita'] == false) : ?>
+          <div class="flex justify-center font-bold text-xl">
+            Data tidak ditemukan
+          </div>
+        <?php endif; ?>
+        <?php if ($data['action'] === 'ubah') : ?>
+          <div class="flex justify-center">
+            <div>
+              <form method="post">
+                <div class="flex mt-5">
+                  <div class="mr-16" style="width: 400px;">
+                    <?php
+                    $label = 'Nama Lengkap';
+                    $id = 'nama_anak';
+                    $type = 'text';
+                    $value = $data['nama_anak'];
+                    $class = 'text-secondary-40 font-semibold mt-2';
+                    include '../src/components/inputRequire.php'
+                    ?>
+                    <?php
+                    $label = 'Berat Badan';
+                    $id = 'bb';
+                    $type = 'text';
+                    $value = $data['bb'];
+                    $maxLength = '50';
+                    $class = 'text-secondary-40 font-semibold mt-2';
+                    include '../src/components/inputRequire.php'
+                    ?>
+                    <?php
+                    $label = 'Tinggi Badan';
+                    $id = 'tb';
+                    $type = 'text';
+                    $value = $data['bb'];
+                    $maxLength = '50';
+                    $class = 'text-secondary-40 font-semibold mt-2';
+                    include '../src/components/inputRequire.php'
+                    ?>
+                    <?php
+                    $label = 'Usia Tahun';
+                    $id = 'usiaTahun';
+                    $type = 'text';
+                    $value = $data['usiaTahun'];
+                    $class = 'text-secondary-40 font-semibold mt-2';
+                    include '../src/components/inputRequire.php'
+                    ?>
+                    <?php
+                    $label = 'usiaBulan';
+                    $id = 'usiaBulan';
+                    $type = 'text';
+                    $value = $data['usiaBulan'];
+                    $class = 'text-secondary-40 font-semibold mt-2';
+                    include '../src/components/inputRequire.php'
+                    ?>
+                  </div>
+                  <div style="width: 400px;">
+                    <?php
+                    $label = 'Jalan/Gg';
+                    $id = 'alamat_jalan';
+                    $type = 'text';
+                    $value = $data['alamat_jalan'];
+                    $maxLength = '50';
+                    $class = 'text-secondary-40 font-semibold mt-2';
+                    include '../src/components/inputRequire.php'
+                    ?>
+                    <div class="flex items-center">
+                      <?php
+                      $label = 'RT';
+                      $id = 'alamat_rt';
+                      $maxLength = '3';
+                      $type = 'text';
+                      $value = $data['alamat_rt'];
+                      $class = 'text-secondary-40 font-semibold mt-2 mr-5';
+                      $style = 'width: 50px';
+                      include '../src/components/inputRequire.php'
+                      ?>
+                      <?php
+                      $label = 'RW';
+                      $id = 'alamat_rw';
+                      $type = 'text';
+                      $value = $data['alamat_rw'];
+                      $class = 'text-secondary-40 font-semibold mt-2';
+                      include '../src/components/inputRequire.php'
+                      ?>
+                      <?php
+                      $label = 'No';
+                      $id = 'alamat_no';
+                      $type = 'text';
+                      $maxLength = '5';
+                      $value = $data['alamat_no'];
+                      $class = 'text-secondary-40 font-semibold mt-2 ml-5';
+                      include '../src/components/inputRequire.php'
+                      ?>
+                    </div>
+                  </div>
+                </div>
+                <center>
+                  <?php
+                  $label = 'Simpan';
+                  $onClick = "";
+                  $class = 'font-semibold mt-5';
+                  $style = 'width:400px; justify-self:center;';
+                  $type = 'submit';
+                  include '../src/components/button.php'
+                  ?>
+                </center>
+
+              </form>
             </div>
           </div>
-          <div class="w-full">
-              <div class="flex">
-                <div class="flex items-center mr-8">
-                  <?php
-                  $label = 'Beran Badan';
-                  $id = 'bb';
-                  $type = 'number';
-                  $class = 'text-secondary-40 font-semibold mt-2';
-                  include '../src/components/input.php'
-                  ?>
-                </div>
-                <div class="flex items-center">
-                  <?php
-                  $label = 'Tinggi Badan';
-                  $id = 'tb';
-                  $type = 'number';
-                  $class = 'text-secondary-40 font-semibold mt-2';
-                  include '../src/components/input.php'
-                  ?>
-                </div>
-              </div>
-            </div>
-        </div>
-        <?php
-        $label = 'Simpan';
-        $onClick = "";
-        $class = 'font-semibold mt-5';
-        include '../src/components/button.php'
-        ?>
+        <?php endif; ?>
       </div>
     </div>
 
   </div>
-  <!-- Sidebar -->
 </div>

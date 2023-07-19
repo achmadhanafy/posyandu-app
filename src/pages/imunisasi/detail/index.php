@@ -14,7 +14,7 @@
             Data Ibu Hamil Berhasil dimasukan
           </div>
         <?php endif; ?> -->
-        <div class="font-semibold text-xl mb-3 text-secondary-40 text-center">Pelayanan</div>
+        <div class="font-semibold text-xl mb-3 text-secondary-40 text-center">Imunisasi</div>
         <?php if ($data['action'] === 'patch-success') : ?>
           <div class="bg-secondary-10 px-3 py-2 my-5 rounded-lg font-semibold text-secondary-40" style="width:fit-content">
             Data berhasil diperbarui
@@ -47,14 +47,14 @@
           </form>
         <?php endif; ?>
 
-        <?php if ($data['action'] != 'ubah' && $data['action'] != 'hapus' && $data['getPelayanan'] !== false) : ?>
+        <?php if ($data['action'] != 'ubah' && $data['action'] != 'hapus' && $data['getImunisasi'] !== false) : ?>
           <?php
-          $headerData = array('ID Pelayanan','Pelayanan', 'Alamat', 'Catatan', 'Jumlah Peserta', 'Tanggal Layanan');
-          $rowData = $data['getPelayanan'];
-          include '../src/components/pelayanan/tableJadwalPelayanan.php'
+          $headerData = array('Id','NIK', 'Nama', 'Imunisasi', 'Catatan', 'Tgl Imunisasi', 'Berat Badan', 'Tinggi Badan');
+          $rowData = $data['getImunisasi'];
+          include '../src/components/imunisasi/tabelImunisasi.php'
           ?>
         <?php endif; ?>
-        <?php if ($data['getPelayanan'] == false) : ?>
+        <?php if ($data['getImunisasi'] == false) : ?>
           <div class="flex justify-center font-bold text-xl">
             Data tidak ditemukan
           </div>

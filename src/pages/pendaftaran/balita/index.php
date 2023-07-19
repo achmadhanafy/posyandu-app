@@ -120,6 +120,23 @@
             $maxLength = '50';
             include '../src/components/inputRequire.php'
             ?>
+            <div class="text-secondary-40 font-semibold mt-2">Jenis Kelamin</div>
+            <?php
+            $label = 'LAKI-LAKI';
+            $id = 'laki';
+            $name ='jenisKelamin';
+            $class = 'text-secondary-40 font-semibold mt-2';
+            $value = "L";
+            include '../src/components/radio.php'
+            ?>
+            <?php
+            $label = 'PEREMPUAN';
+            $id = 'perempuan';
+            $name ='jenisKelamin';
+            $class = 'text-secondary-40 font-semibold mt-2';
+            $value = "P";
+            include '../src/components/radio.php'
+            ?>
             <?php
             $label = 'Tanggal Lahir';
             $id = 'tanggalLahir';
