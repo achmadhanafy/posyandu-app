@@ -63,9 +63,12 @@
      RW.<?= $row['alamat_rw'] ?>
      No.<?= $row['alamant_no'] ?>
     </td>
-    <td>
-     <a href="<?= BASEURL ?>public/imunisasi/detail/<?= $row['nik'] ?>" class="cursor-pointer bg-primary-30 px-3 py-2 rounded-lg font-semibold mb-3 text-center text-white">
+    <td style='width:200px;'>
+     <a style='margin-right:10px;' href="<?= BASEURL ?>public/imunisasi/detail/<?= $row['nik'] ?>" class="cursor-pointer bg-primary-30 px-3 py-2 rounded-lg font-semibold mb-3 text-center text-white">
       Lihat
+     </a>
+     <a href="<?= BASEURL ?>public/imunisasi/tambah/<?= $row['nik'] ?>/<?= $row['nama_anak'] ?>" class="cursor-pointer bg-secondary-40 px-3 py-2 rounded-lg font-semibold mb-3 text-center text-white">
+      Imunisasi
      </a>
     </td>
 

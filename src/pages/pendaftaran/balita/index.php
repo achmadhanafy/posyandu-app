@@ -13,7 +13,7 @@
           <?php
           $label = 'Pendaftaran Balita';
           $onClick = 'navigatePendaftaranBalita()';
-          $class = 'font-semibold w-[200px]';
+          $class = 'font-semibold w-[200px] mr-5';
           include '../src/components/button.php'
           ?>
           <?php
