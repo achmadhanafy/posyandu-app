@@ -1,8 +1,18 @@
 <?php
 
 class Laporan extends Controller {
+ public function index($action ='', $id ='')
+ {
+  $data['title'] = 'Halaman Laporan';
+  $data['path'] = 'pendaftaran';
+  $this->view('templates/header', $data);
+  $this->view('pages/laporan/index', $data);
+  $this->view('templates/footer');
+ }
+
  public function dataBalita($action ='', $id ='')
  {
+
   $data['action'] = $action;
   $data['id'] = $id;
   $data['cari_data'] = '';
@@ -22,6 +32,7 @@ class Laporan extends Controller {
 
   $data['title'] = 'Halaman Laporan';
   $data['path'] = 'pendaftaran';
+  $this->dompdf($data,'pages/laporan/dataBalita/index.php');
   $this->view('templates/header', $data);
   $this->view('pages/laporan/dataBalita/index', $data);
   $this->view('templates/footer');
@@ -48,6 +59,7 @@ class Laporan extends Controller {
 
   $data['title'] = 'Halaman Laporan';
   $data['path'] = 'pendaftaran';
+  $this->dompdf($data, 'pages/laporan/dataIbuHamil/index.php');
   $this->view('templates/header', $data);
   $this->view('pages/laporan/dataIbuHamil/index', $data);
   $this->view('templates/footer');
@@ -74,6 +86,7 @@ class Laporan extends Controller {
 
   $data['title'] = 'Halaman Laporan';
   $data['path'] = 'pendaftaran';
+  $this->dompdf($data,'pages/laporan/dataPelayananBalita/index.php');
   $this->view('templates/header', $data);
   $this->view('pages/laporan/dataPelayananBalita/index', $data);
   $this->view('templates/footer');
@@ -100,6 +113,8 @@ class Laporan extends Controller {
 
   $data['title'] = 'Halaman Laporan';
   $data['path'] = 'pendaftaran';
+
+  $this->dompdf($data,'pages/laporan/dataPelayananIbuHamil/index.php');
   $this->view('templates/header', $data);
   $this->view('pages/laporan/dataPelayananIbuHamil/index', $data);
   $this->view('templates/footer');
@@ -119,15 +134,17 @@ class Laporan extends Controller {
    $data['cari_data'] = $_POST['cari_data'];
   } else {
   // Get Data Ibu Hamil
-  $queryGetIbuHamil = "SELECT peserta.id,peserta.nik,ibuhamil.nama,ibuhamil.no_tlp,peserta.status,pelayanan.catatan,pelayanan.resep,pelayanan.tekanan_darah,pelayanan.usia_hamil,pelayanan.bb FROM `tb_detail_pelayanan_ibuhamil` as pelayanan INNER JOIN `tb_peserta_layanan` as peserta ON pelayanan.id_peserta = peserta.id INNER JOIN `tb_ibuhamil` as ibuhamil ON peserta.nik = ibuhamil.nik";
+  $queryGetIbuHamil = "SELECT imunisasi.nik,balita.nama_anak,balita.tgl_lahir,balita.nama_ibu,balita.alamat_jalan,balita.alamat_rt,balita.alamat_rw,balita.alamant_no,imunisasi.imunisasi,imunisasi.catatan,imunisasi.tgl FROM `tb_imunisasi` as imunisasi INNER JOIN `tb_balita` as balita ON imunisasi.nik = balita.nik ";
   $resultGetIbuHamil = mysqli_query($this->conn(), $queryGetIbuHamil);
   $data['getIbuHamil'] = $resultGetIbuHamil;
   }
 
   $data['title'] = 'Halaman Laporan';
   $data['path'] = 'pendaftaran';
+  $this->dompdf($data,'pages/laporan/dataImunisasi/index.php');
   $this->view('templates/header', $data);
   $this->view('pages/laporan/dataImunisasi/index', $data);
   $this->view('templates/footer');
  }
+
 }

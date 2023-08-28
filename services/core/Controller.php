@@ -1,10 +1,42 @@
 <?php
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 class Controller
 {
     public function view($view, $data = [])
     {
         require_once '../src/' . $view . '.php';
+    }
+
+    public function dompdf($data, $path)
+    {
+        require_once '../src/lib/dompdf/autoload.inc.php';
+        $options = new Options();
+        $options->set('isPhpEnabled', true);
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
+        // Start buffering output
+        ob_start();
+
+        // Include the PHP and HTML content
+        include '../src/'.$path; // This file contains your PHP code and HTML
+
+        // Get the content from the buffer
+        $html = ob_get_clean();
+
+        // Convert HTML to PDF
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape'); // You can set the paper size and orientation here
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Output the PDF as a downloadable file
+        $dompdf->stream('pdf_output.pdf', array('Attachment' => 0));
     }
 
     public function conn()

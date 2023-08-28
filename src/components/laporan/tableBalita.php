@@ -7,7 +7,7 @@
   }
 
   table td {
-    padding: 15px;
+    padding: 5px;
   }
 
   table thead td {

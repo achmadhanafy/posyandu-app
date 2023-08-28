@@ -32,5 +32,25 @@ function navigatePengkinianBalita(){
   document.location.href = `${BASE_URL}public/pengkinian/balita`;
 }
 
+function navigateLaporanBalita(){
+  document.location.href = `${BASE_URL}public/laporan/dataBalita`;
+}
+
+function navigateLaporanIbuHamil(){
+  document.location.href = `${BASE_URL}public/laporan/dataIbuHamil`;
+}
+
+function navigateLaporanPelayananBalita(){
+  document.location.href = `${BASE_URL}public/laporan/dataPelayananBalita`;
+}
+
+function navigateLaporanPelayananIbuHamil(){
+  document.location.href = `${BASE_URL}public/laporan/dataPelayananIbuHamil`;
+}
+
+function navigateLaporanImunisasi(){
+  document.location.href = `${BASE_URL}public/laporan/dataImunisasi`;
+}
+
 
 

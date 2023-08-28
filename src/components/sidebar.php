@@ -37,12 +37,12 @@
         Imunisasi
       </div>
     </a>
-    <div class="flex text-white mt-5 text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
+    <a href="<?= BASEURL ?>public/laporan" class="flex text-white mt-5 text-center cursor-pointer text-lg px-5 py-2 bg-secondary-40 rounded-lg shadow-md shadow-secondary-20">
       <img style="width: 25px; height: 25px" src="<?= ASSET; ?>laporan.svg" />
       <div class="ml-5">
         Laporan
       </div>
-    </div>
+    </a>
   </div>
   <div class="text-secondary-40 font-bold cursor-pointer bottom-0 mt-5 text-center text-lg px-5 py-2 rounded-lg flex items-center">
     <img style="width: 25px; height: 25px" src="<?= ASSET; ?>logout.svg" />
